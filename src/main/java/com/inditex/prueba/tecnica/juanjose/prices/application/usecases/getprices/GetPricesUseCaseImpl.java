@@ -14,13 +14,11 @@ import lombok.RequiredArgsConstructor;
 public class GetPricesUseCaseImpl implements GetPricesUseCase {
 
 	private final PriceRepository priceRepository;
-	
-	@Override
-	public Price getPricesForMarkAndProductByDate(final Integer brandId, final Integer productId, final LocalDateTime askDate) {
 
-		Price price = priceRepository.getPricesForMarkAndProductByDate(brandId, productId, askDate);
-		
-		return price;
+	@Override
+	public Price getPricesForMarkAndProductByDate(final Integer brandId, final Integer productId,
+			final LocalDateTime askDate) {
+		return priceRepository.getPricesForMarkAndProductByDate(brandId, productId, askDate);
 	}
 
 }

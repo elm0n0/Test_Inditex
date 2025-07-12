@@ -1,10 +1,8 @@
-com\inditex\prueba\tecnica\juanjose\prices\application\exceptions\InvalidBrandIdException.class
 com\inditex\prueba\tecnica\juanjose\prices\domain\repository\PriceRepository.class
 com\inditex\prueba\tecnica\juanjose\prices\application\exceptions\PriceException.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\persistence\mappers\PriceJpaMapperImpl.class
 com\inditex\prueba\tecnica\juanjose\prices\application\exceptions\PriceNotFoundException.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\mapper\PriceRestMapperImpl.class
-com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\request\PriceResquest.class
 com\inditex\prueba\tecnica\juanjose\prices\application\usecases\getprices\GetPricesUseCase.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\responses\ErrorResponse.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\responses\PriceResponse.class
@@ -16,6 +14,5 @@ com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\persi
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\persistence\entities\PriceJpaEntity.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\mapper\PriceRestMapper.class
 com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\persistence\mappers\PriceJpaMapper.class
-com\inditex\prueba\tecnica\juanjose\prices\application\exceptions\InvalidAskDateException.class
 com\inditex\prueba\tecnica\juanjose\JuanjoseApplication.class
 com\inditex\prueba\tecnica\juanjose\prices\domain\models\Price.class

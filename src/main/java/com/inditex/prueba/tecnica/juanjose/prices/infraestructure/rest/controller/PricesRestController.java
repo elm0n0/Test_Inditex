@@ -35,8 +35,11 @@ public class PricesRestController {
 	private final GetPricesUseCase getPricesUseCase;
 
 	@GetMapping
-	@Operation(summary = "Obtiene el precio más relevante para un producto de una marca en una fecha y hora dadas.", description = "Busca en la base de datos el precio aplicable para el producto y la marca indicados, en la fecha y hora proporcionadas. "
-			+ "Si hay múltiples precios aplicables, se selecciona el de mayor prioridad. ", responses = {
+	@Operation(
+			summary = "Obtiene el precio más relevante para un producto de una marca en una fecha y hora dadas.",
+			description = "Busca en la base de datos el precio aplicable para el producto y la marca indicados, en la fecha y hora proporcionadas. "
+					+ "Si hay múltiples precios aplicables, se selecciona el de mayor prioridad. ",
+			responses = {
 					@ApiResponse(responseCode = "200", description = "Precio encontrado exitosamente.", content = @Content(schema = @Schema(implementation = PriceResponse.class))),
 					@ApiResponse(responseCode = "400", description = "Parámetros de entrada inválidos. Asegúrese de que brandId y productId son numéricos y askDate tiene el formato correcto (ISO 8601).", content = @Content(schema = @Schema(example = "{\"status\": 400, \"error\": \"Bad Request\", \"message\": \"Formato de fecha inválido.\"}"))),
 					@ApiResponse(responseCode = "404", description = "No se encontró ningún precio para los criterios especificados.", content = @Content(schema = @Schema(example = "{\"status\": 404, \"error\": \"Not Found\", \"message\": \"No price found for brandId: 1, productId: 35455, and date: 2020-06-14T10:00:00\"}"))),
@@ -51,7 +54,7 @@ public class PricesRestController {
 		} catch (NoSuchElementException ex) {
 			throw new PriceNotFoundException(String.valueOf(brandId), String.valueOf(productId), askDate.toString());
 		}
-		return new ResponseEntity<PriceResponse>(PriceRestMapper.INSTANCE.PriceToPriceResponse(response),
+		return new ResponseEntity<>(PriceRestMapper.INSTANCE.priceToPriceResponse(response),
 				HttpStatus.OK);
 	}
 

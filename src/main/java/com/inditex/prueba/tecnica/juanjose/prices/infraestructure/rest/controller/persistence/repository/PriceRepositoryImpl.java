@@ -21,12 +21,10 @@ public class PriceRepositoryImpl implements PriceRepository {
 
 	@Override
 	public Price getPricesForMarkAndProductByDate(Integer brandId, Integer productId, LocalDateTime askDate) {
-
 		Optional<PriceJpaEntity> priceJpaEntity = priceJpaRepository
 				.findFirstByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityDesc(
 						brandId, productId, askDate, askDate);
-
+		
 		return PriceJpaMapper.INSTANCE.priceJpaToPrice(priceJpaEntity.orElseThrow());
 	}
-
 }

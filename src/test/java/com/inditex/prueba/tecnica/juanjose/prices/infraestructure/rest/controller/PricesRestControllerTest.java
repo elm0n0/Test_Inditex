@@ -17,8 +17,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -32,36 +32,85 @@ class PricesRestControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@MockitoBean
+	@MockBean
 	private GetPricesUseCase getPricesUseCase;
 
 	static Stream<PriceTestData> getSuccessfulPriceData() {
 		return Stream.of(
 				// Prueba 1:
-				new PriceTestData("Prueba 1: 10:00 del día 14", 1, 35455, LocalDateTime.of(2020, 6, 14, 10, 0, 0),
-						new Price(1, LocalDateTime.of(2020, 6, 14, 0, 0, 0), LocalDateTime.of(2020, 12, 31, 23, 59, 59),
-								1, 35455, 0, new BigDecimal("35.5"), "EUR"),
+				new PriceTestData(
+						"Prueba 1: 10:00 del día 14",
+						1,
+						35455,
+						LocalDateTime.of(2020, 6, 14, 10, 0, 0),
+						new Price(
+								1,
+								35455,
+								1,
+								LocalDateTime.of(2020, 6, 14, 0, 0, 0),
+								LocalDateTime.of(2020, 12, 31, 23, 59, 59),
+								0,
+								new BigDecimal("35.5"), "EUR"),
 						new BigDecimal("35.5"), 1),
 				// Prueba 2:
-				new PriceTestData("Prueba 2: 16:00 del día 14", 1, 35455, LocalDateTime.of(2020, 6, 14, 16, 0, 0),
-						new Price(1, LocalDateTime.of(2020, 6, 14, 15, 0, 0), LocalDateTime.of(2020, 6, 14, 18, 30, 0),
-								2, 35455, 1, new BigDecimal("25.45"), "EUR"),
+				new PriceTestData(
+						"Prueba 2: 16:00 del día 14",
+						1,
+						35455,
+						LocalDateTime.of(2020, 6, 14, 16, 0, 0),
+						new Price(
+								1,
+								35455,
+								2,
+								LocalDateTime.of(2020, 6, 14, 15, 0, 0),
+								LocalDateTime.of(2020, 6, 14, 18, 30, 0),
+								1,
+								new BigDecimal("25.45"), "EUR"),
 						new BigDecimal("25.45"), 2),
 				// Prueba 3:
-				new PriceTestData("Prueba 3: 21:00 del día 14", 1, 35455, LocalDateTime.of(2020, 6, 14, 21, 0, 0),
-						new Price(1, LocalDateTime.of(2020, 6, 14, 0, 0, 0), LocalDateTime.of(2020, 12, 31, 23, 59, 59),
-								1, 35455, 0, new BigDecimal("35.5"), "EUR"),
+				new PriceTestData(
+						"Prueba 3: 21:00 del día 14",
+						1,
+						35455,
+						LocalDateTime.of(2020, 6, 14, 21, 0, 0),
+						new Price(
+								1,
+								35455,
+								1,
+								LocalDateTime.of(2020, 6, 14, 0, 0, 0),
+								LocalDateTime.of(2020, 12, 31, 23, 59, 59),
+								0,
+								new BigDecimal("35.5"), "EUR"),
 						new BigDecimal("35.5"), 1),
 				// Prueba 4:
-				new PriceTestData("Prueba 4: 10:00 del día 15", 1, 35455, LocalDateTime.of(2020, 6, 15, 10, 0, 0),
-						new Price(1, LocalDateTime.of(2020, 6, 15, 0, 0, 0), LocalDateTime.of(2020, 6, 15, 11, 0, 0), 3,
-								35455, 1, new BigDecimal("30.5"), "EUR"),
+				new PriceTestData(
+						"Prueba 4: 10:00 del día 15",
+						1,
+						35455,
+						LocalDateTime.of(2020, 6, 15, 10, 0, 0),
+						new Price(
+								1,
+								35455,
+								3,
+								LocalDateTime.of(2020, 6, 15, 0, 0, 0),
+								LocalDateTime.of(2020, 6, 15, 11, 0, 0),
+								1,
+								new BigDecimal("30.5"), "EUR"),
 						new BigDecimal("30.5"), 3),
 				// Prueba 5:
-				new PriceTestData("Prueba 5: 21:00 del día 16", 1, 35455, LocalDateTime.of(2020, 6, 16, 21, 0, 0),
-						new Price(1, LocalDateTime.of(2020, 6, 15, 16, 0, 0),
-								LocalDateTime.of(2020, 12, 31, 23, 59, 59), 4, 35455, 1, new BigDecimal("38.95"),
-								"EUR"),
+				new PriceTestData(
+						"Prueba 5: 21:00 del día 16",
+						1,
+						35455,
+						LocalDateTime.of(2020, 6, 16, 21, 0, 0),
+						new Price(
+								1,
+								35455,
+								4,
+								LocalDateTime.of(2020, 6, 15, 16, 0, 0),
+								LocalDateTime.of(2020, 12, 31, 23, 59, 59),
+								1,
+								new BigDecimal("38.95"), "EUR"),
 						new BigDecimal("38.95"), 4));
 	}
 
@@ -82,7 +131,7 @@ class PricesRestControllerTest {
 				.andExpect(status().isOk()).andExpect(jsonPath("$.brandId").value(testData.getBrandId()))
 				.andExpect(jsonPath("$.productId").value(testData.getProductId()))
 				.andExpect(jsonPath("$.price").value(testData.getExpectedFinalPrice()))
-				.andExpect(jsonPath("$.priceList").value(testData.getExpectedPriceList()))
+				.andExpect(jsonPath("$.tarifa").value(testData.getExpectedPriceList()))
 				.andExpect(jsonPath("$.curr").value("EUR"));
 	}
 	

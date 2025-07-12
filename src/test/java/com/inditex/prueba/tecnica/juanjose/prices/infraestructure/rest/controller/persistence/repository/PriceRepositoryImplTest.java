@@ -37,8 +37,15 @@ class PriceRepositoryImplTest {
 		Integer productId = 35455;
 		LocalDateTime askDate = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
 
-		PriceJpaEntity jpaEntity = new PriceJpaEntity(1L, brandId, LocalDateTime.of(2020, 6, 14, 0, 0, 0),
-				LocalDateTime.of(2020, 12, 31, 23, 59, 59), 1, productId, 0, new BigDecimal("35.50"), "EUR");
+		PriceJpaEntity jpaEntity = new PriceJpaEntity(
+				1L,
+				brandId,
+				LocalDateTime.of(2020, 6, 14, 0, 0, 0),
+				LocalDateTime.of(2020, 12, 31, 23, 59, 59),
+				1,
+				productId,
+				0,
+				new BigDecimal("35.50"), "EUR");
 
 		when(priceJpaRepository
 				.findFirstByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityDesc(
@@ -50,7 +57,7 @@ class PriceRepositoryImplTest {
 		assertNotNull(resultPrice, "El objeto Price devuelto no debe ser nulo");
 		assertEquals(jpaEntity.getBrandId(), resultPrice.brandId());
 		assertEquals(jpaEntity.getProductId(), resultPrice.productId());
-		assertEquals(jpaEntity.getPriceList(), resultPrice.priceList());
+		assertEquals(jpaEntity.getPriceList(), resultPrice.tarifa());
 		assertEquals(jpaEntity.getPriority(), resultPrice.priority());
 		assertEquals(jpaEntity.getStartDate(), resultPrice.startDate());
 		assertEquals(jpaEntity.getEndDate(), resultPrice.endDate());

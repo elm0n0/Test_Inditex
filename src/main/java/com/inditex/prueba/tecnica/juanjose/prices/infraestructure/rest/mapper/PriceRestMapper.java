@@ -11,6 +11,6 @@ public interface PriceRestMapper {
 
 	PriceRestMapper INSTANCE = Mappers.getMapper(PriceRestMapper.class);
 	
-	PriceResponse PriceToPriceResponse(Price priceResponse);
+	PriceResponse priceToPriceResponse(Price priceResponse);
 	
 }

@@ -8,8 +8,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-07-11T17:37:13+0200",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 24.0.1 (Oracle Corporation)"
+    date = "2025-07-12T13:53:34+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.7 (Oracle Corporation)"
 )
 public class PriceJpaMapperImpl implements PriceJpaMapper {
 
@@ -19,25 +19,25 @@ public class PriceJpaMapperImpl implements PriceJpaMapper {
             return null;
         }
 
+        Integer tarifa = null;
         Integer brandId = null;
+        Integer productId = null;
         LocalDateTime startDate = null;
         LocalDateTime endDate = null;
-        Integer priceList = null;
-        Integer productId = null;
         Integer priority = null;
         BigDecimal price = null;
         String curr = null;
 
+        tarifa = priceJpaEntity.getPriceList();
         brandId = priceJpaEntity.getBrandId();
+        productId = priceJpaEntity.getProductId();
         startDate = priceJpaEntity.getStartDate();
         endDate = priceJpaEntity.getEndDate();
-        priceList = priceJpaEntity.getPriceList();
-        productId = priceJpaEntity.getProductId();
         priority = priceJpaEntity.getPriority();
         price = priceJpaEntity.getPrice();
         curr = priceJpaEntity.getCurr();
 
-        Price price1 = new Price( brandId, startDate, endDate, priceList, productId, priority, price, curr );
+        Price price1 = new Price( brandId, productId, tarifa, startDate, endDate, priority, price, curr );
 
         return price1;
     }
