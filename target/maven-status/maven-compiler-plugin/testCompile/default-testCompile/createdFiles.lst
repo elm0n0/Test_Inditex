@@ -1,5 +1,0 @@
-com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\testdata\PriceTestData.class
-com\inditex\prueba\tecnica\juanjose\JuanjoseApplicationTests.class
-com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\PricesRestControllerTest.class
-com\inditex\prueba\tecnica\juanjose\prices\application\usecases\getprices\GetPricesUseCaseImplTest.class
-com\inditex\prueba\tecnica\juanjose\prices\infraestructure\rest\controller\persistence\repository\PriceRepositoryImplTest.class

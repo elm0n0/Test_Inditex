@@ -1,0 +1,103 @@
+openapi: 3.0.1
+info:
+  title: Prices API
+  description: API para consultar los precios de los productos de Inditex.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+    description: Servidor de desarrollo
+tags:
+  - name: prices
+    description: Operaciones sobre precios
+paths:
+  /prices:
+    get:
+      summary: Obtiene el precio más relevante para un producto de una marca en una fecha y hora dadas.
+      operationId: getPrices
+      tags:
+        - prices
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          description: ID de la marca (ej. 1)
+          schema:
+            type: integer
+        - name: productId
+          in: query
+          required: true
+          description: ID del producto (ej. 35455)
+          schema:
+            type: integer
+        - name: askDate
+          in: query
+          required: true
+          description: Fecha y hora de consulta en formato ISO 8601 sin zona horaria (ej. 2020-06-14T10:00:00). La zona horaria del servidor se aplicará automáticamente.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Precio encontrado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Parámetros de entrada inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No se encontró ningún precio para los criterios especificados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        brandId:
+          type: integer
+          example: 1
+        productId:
+          type: integer
+          example: 35455
+        tarifa:
+          type: integer
+          example: 1
+        startDate:
+          type: string
+          format: date-time
+          example: '2020-06-14T10:00:00Z'
+        endDate:
+          type: string
+          format: date-time
+          example: '2020-06-14T10:00:00Z'
+        price:
+          type: number
+          format: float
+          example: 35.50
+        currency:
+          type: string
+          example: EUR
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: "No price found for brandId: 1, productId: 35455, and date: 2020-06-14T10:00:00"

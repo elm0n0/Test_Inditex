@@ -12,16 +12,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class JuanjoseApplicationTests {
 
-	@Test
+    @Test
     @DisplayName("Debe ejecutar SpringApplication.run() cuando se llama al método main")
     void mainMethodShouldRunSpringApplication() {
-        try (MockedStatic<SpringApplication> mockedSpringApplication = mockStatic(SpringApplication.class)) {
-            mockedSpringApplication.when(() -> SpringApplication.run(any(Class.class), any(String[].class)))
-                                   .thenReturn(null);
-            JuanjoseApplication.main(new String[]{});
-            mockedSpringApplication.verify(() -> SpringApplication.run(JuanjoseApplication.class, new String[]{}),
-                                          org.mockito.Mockito.times(1));
+        try (MockedStatic<SpringApplication> mockedSpringApplication =
+                mockStatic(SpringApplication.class)) {
+            mockedSpringApplication
+                    .when(() -> SpringApplication.run(any(Class.class), any(String[].class)))
+                    .thenReturn(null);
+            JuanjoseApplication.main(new String[] {});
+            mockedSpringApplication.verify(
+                    () -> SpringApplication.run(JuanjoseApplication.class, new String[] {}),
+                    org.mockito.Mockito.times(1));
         }
     }
-
 }
